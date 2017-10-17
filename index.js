@@ -7,7 +7,7 @@ const selectors = {
 };
 
 const url = 'http://bit.ly/29briww';
-
+const viewerUrl = 'http://www.websyndic.com/wv3/target.php';
 
 main();
 
@@ -17,10 +17,12 @@ async function main() {
 	await page.goto(url);
 	await page.waitForSelector(selectors.startViewerDiv);
 	await page.click(selectors.startViewerLink);
-	setInterval(async () => {
-		let stats = extractStats(await page.content());
-		console.log(`Stats: ${stats.creditsInBank} ${stats.sitesVisitedToday}`);
-	}, 5000);
+	
+	// //Stats
+	// setInterval(async () => {
+	// 	let stats = extractStats(await page.content());
+	// 	console.log(`Stats: ${stats.creditsInBank} ${stats.sitesVisitedToday}`);
+	// }, 5000);
 }
 
 function extractStats(html) {
