@@ -14,9 +14,10 @@ main();
 /**
  * TODO:
  * Set up one master instance that will log into websyndic and get the lite viewer url. Only this instance will have the real IP.
+ * Get statistics for each slave using the master instance
  * Spawn a tor server, using a prebuilt tor binary
  * Spawn slave instances that use tor (https://tor.stackexchange.com/questions/3435/how-do-i-configure-chrome-to-use-tor), each using a new ip
- * Start each slave instance
+ * Start and manage each slave instance
  * 
  * Error handling:
  * detect IP banned, timeout and other network errors, and restart the slave with a new IP
