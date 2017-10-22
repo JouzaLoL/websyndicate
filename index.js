@@ -17,6 +17,7 @@ main();
  * 
  * Error handling:
  * detect IP banned, timeout and other network errors, and restart the slave with a new IP
+ * detect page crash and restart
  */
 async function main() {
 	console.log(chalk.green('Welcome to Websyndicate!'));
@@ -35,6 +36,15 @@ async function main() {
 		const log_text = `Current page: ${stats.currentPage} | Site stats: day ${stats.sitesDay} - week: ${stats.sitesWeek} - month: ${stats.sitesMonth}`;
 		console.log(log_text);
 	});
+
+	statsPage.on('error', async () => await restart(browser));
+	viewerPage.on('error', async () => await restart(browser));
+}
+
+async function restart(browser) {
+	console.log('! Page crashed, restarting...');
+	await browser.close();
+	main();
 }
 
 function parseStatsPage(html) {
