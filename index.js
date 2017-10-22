@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-const cheerio = require('cheerio');
 const chalk = require('chalk');
 
 const selectors = {
@@ -13,7 +12,6 @@ main();
 
 /**
  * TODO:
- * Okay, tor might not be the best solution here. Maybe use different heroku dynos?
  * 
  * Error handling:
  * detect IP banned, timeout and other network errors, and restart the slave with a new IP
@@ -27,25 +25,7 @@ async function main() {
 	await page.waitForSelector(selectors.startViewerDiv);
 	await page.click(selectors.startViewerLink);
 
-	// //Stats
-	// setInterval(async () => {
-	// 	let stats = extractStats(await page.content());
-	// 	console.log(`Stats: ${stats.creditsInBank} ${stats.sitesVisitedToday}`);
-	// }, 5000);
-
 	page.on('load', async () => {
 		console.log(chalk.white('Current page: ' + await page.url()));
 	});
-}
-
-function extractStats(html) {
-	let $ = cheerio.load(html);
-	let creditsInBank = $('div#user_credits').text();
-
-	let sitesVisitedToday = $('div#user_cj').text();
-
-	return {
-		creditsInBank,
-		sitesVisitedToday
-	};
 }
