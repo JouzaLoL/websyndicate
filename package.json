@@ -4,7 +4,8 @@
   "description": "A Websyndic.com background bot.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+	"test": "mocha",
+	"start": "node index.js"
   },
   "keywords": [
     "websyndic"
