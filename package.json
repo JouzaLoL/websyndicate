@@ -1,20 +1,23 @@
 {
-  "name": "websyndicate",
-  "version": "1.0.0",
-  "description": "A Websyndic.com background bot.",
-  "main": "index.js",
-  "scripts": {
-	"test": "mocha",
-	"start": "node index.js"
-  },
-  "keywords": [
-    "websyndic"
-  ],
-  "author": "Josef Vacek",
-  "license": "MIT",
-  "dependencies": {
-    "chalk": "^2.1.0",
-    "cheerio": "^1.0.0-rc.2",
-    "puppeteer": "^0.12.0"
-  }
+	"name": "websyndicate",
+	"version": "1.0.0",
+	"description": "A Websyndic.com background bot.",
+	"main": "index.js",
+	"scripts": {
+		"test": "mocha",
+		"start": "node index.js"
+	},
+	"keywords": [
+		"websyndic"
+	],
+	"author": "Josef Vacek",
+	"license": "MIT",
+	"dependencies": {
+		"chalk": "^2.1.0",
+		"cheerio": "^1.0.0-rc.2",
+		"puppeteer": "^0.12.0"
+	},
+	"engines": {
+		"node": "8.6.0"
+	}
 }
