@@ -75,9 +75,3 @@ function parseStatsPage(html) {
 		sitesMonth
 	};
 }
-
-var logStats = function (statsPageContent) {
-	const stats = parseStatsPage(statsPageContent);
-	const log_text = `Current page: ${stats.currentPage} | Site stats: day: ${stats.sitesDay} - week: ${stats.sitesWeek} - month: ${stats.sitesMonth}`;
-	console.log(log_text);
-};
