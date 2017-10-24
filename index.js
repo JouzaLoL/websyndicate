@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer');
 const chalk = require('chalk');
 const cheerio = require('cheerio');
 const eventToPromise = require('event-to-promise');
-const restartDynos = require('./restart');
 
 const selectors = {
 	startViewerLink: '#main_page_offline > div > div.config_line > div > div > a',
@@ -12,7 +11,6 @@ const viewerURL = 'http://bit.ly/29briww';
 
 var browser;
 var lastPage;
-
 
 main();
 
@@ -49,13 +47,14 @@ async function main() {
 		console.log(log_text);
 	});
 
-	statsPage.on('error', () => restart());
-	viewerPage.on('error', () => restart());
+	statsPage.on('error', () => restart(browser));
+	viewerPage.on('error', () => restart(browser));
 }
 
-async function restart() {
+async function restart(brwsr) {
 	console.log('! Page crashed, restarting...');
-	restartDynos();
+	await brwsr.close();
+	main();
 }
 
 function parseStatsPage(html) {
