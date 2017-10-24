@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const chalk = require('chalk');
 const cheerio = require('cheerio');
 const eventToPromise = require('event-to-promise');
+const restartDynos = require('./restart');
 
 const selectors = {
 	startViewerLink: '#main_page_offline > div > div.config_line > div > div > a',
@@ -31,7 +32,7 @@ async function main() {
 		// wait for stats page to load
 		await eventToPromise(browser, 'targetcreated');
 	} catch (error) {
-		restart(browser);
+		restart();
 	}
 
 	const pages = await browser.pages();
@@ -48,15 +49,13 @@ async function main() {
 		console.log(log_text);
 	});
 
-	statsPage.on('error', () => restart(browser));
-	viewerPage.on('error', () => restart(browser));
+	statsPage.on('error', () => restart());
+	viewerPage.on('error', () => restart());
 }
 
 async function restart() {
 	console.log('! Page crashed, restarting...');
-	await browser.pages[1].close();
-	await browser.pages[2].close();
-	main();
+	restartDynos();
 }
 
 function parseStatsPage(html) {
