@@ -47,13 +47,13 @@ async function main() {
 		console.log(log_text);
 	});
 
-	statsPage.on('error', () => restart(browser));
-	viewerPage.on('error', () => restart(browser));
+	statsPage.on('error', () => restart());
+	viewerPage.on('error', () => restart());
 }
 
-async function restart(brwsr) {
+async function restart() {
 	console.log('! Page crashed, restarting...');
-	await brwsr.close();
+	await browser.close();
 	main();
 }
 
