@@ -12,10 +12,15 @@ const viewerURL = 'http://bit.ly/29briww';
 var browser;
 var lastPage;
 
-main();
+main()
+	.then(() => {
+		console.log(chalk.green('Welcome to Websyndicate!'));
+	}).catch((err) => {
+		console.log(chalk.red('! Error while launching Websyndicate'));
+		console.log(err);
+	});
 
 async function main() {
-	console.log(chalk.green('Welcome to Websyndicate!'));
 	browser = await puppeteer.launch({
 		headless: true,
 		args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -54,7 +59,7 @@ async function main() {
 async function restart() {
 	console.log('! Page crashed, restarting...');
 	await browser.close();
-	main();
+	await main();
 }
 
 function parseStatsPage(html) {
