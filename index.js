@@ -16,7 +16,7 @@ main()
 	.then(() => {
 		console.log(chalk.green('Welcome to Websyndicate!'));
 	}).catch((err) => {
-		console.log(chalk.red('! Error while launching Websyndicate'));
+		console.error(chalk.red('! Error while launching Websyndicate'));
 		console.log(err);
 	});
 
@@ -57,7 +57,7 @@ async function main() {
 }
 
 async function restart() {
-	console.log('! Page crashed, restarting...');
+	console.log('! Page crashed, restarting browser');
 	await browser.close();
 	await main();
 }
